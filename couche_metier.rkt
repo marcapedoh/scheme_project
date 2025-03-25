@@ -1,66 +1,5 @@
 #lang scheme
 
-
-#|(provide operateur operande1 operande2 constructeur constante? indentificateur? surparenthese?)
-
-(define last ;cette fonction retourne le dernier élément de la liste s'il existe sinon on retourne la liste vide
-  (lambda (lst)
-    (if (null? (cdr lst))
-        (car lst)
-        (last (cdr lst))
-     )
-   )
-)
-
-(define operateur (lambda(exp) ;cette fonction retournera un symbole arthmétique s'il y a lieu dans l'expression que ce soit en préfixé ou infixé
-                    (cond
-                      ((symbol? (car exp)) (car exp))
-                      ((symbol? (cadr exp)) (cadr exp))
-                      (else (last exp))
-                     )
-                   )
-)
-
-(define operande1(lambda(exp) ;cette fonction retourne le premier opérateur de l'expression
-                   (cond
-                     ((symbol? (car exp)) (cadr exp))
-                     ((symbol? (cadr exp)) (car exp))
-                     ((symbol? (last exp)) (car exp))
-                     
-                    )
-                 )
-)
-
-(define operande2(lambda(exp); cette fonction retour le deuxieme opérateur de l'équation
-                   (cond
-                     ((symbol? (car exp)) (caddr exp))
-                     ((symbol? (cadr exp)) (caddr exp))
-                     ((symbol? (last exp)) (cadr exp))
-                    )
-                  )
- )
-
-(define constante?(lambda (exp) ;cette fonction retourne un etat booléen si l'expression fourni en parametre est une constante ou pas
-                    (number? exp)
-                   )
-)
-
-(define indentificateur? (lambda (exp) ; cette fonction return un booléen si l'expression en parametre est un symbole ou pas
-                          (symbol? exp)
-                          )
-)
-
-(define surparenthese? (lambda (exp); cette fonction retourne une expression qui a été surparentheser
-                         (= (length exp) 1)
-                        )
- 
-)
-(define constructeur (lambda (exp1 operateur exp2); cette fonction permet de creer une expression
-                       (list exp1 operateur exp2)
-                      )
-)|#
-
-
 (provide operateur operande1 operande2 operateur_as_symbol operande_test_1 operande_test_2  constructeur constante? identificateur? surparenthese?)
 
 
@@ -85,11 +24,6 @@
                                            
 (define operateur (lambda (exp)              ;la fonction operateur:expression -----> operateur
                   (car (cdr exp))            ;elle renvoie l'operateur principale d'une expression arithmétique
-                     #|(cond
-                      ((symbol? (car exp)) (car exp))
-                      ((symbol? (cadr exp)) (cadr exp))
-                      (else (last exp))
-                     )|#
         ))
 
 
@@ -149,6 +83,14 @@
 (operateur_as_symbol '((X) + (1 * y)))
 (operateur_as_symbol '(3 / 2))
 (operateur_as_symbol '(5 9 *))
+(constante? '(5))
+(constante? 9)
+(identificateur? 45)
+(identificateur? 'X)
+(surparenthese? '(45))
+(constructeur '+ 'x 7812)
+(constructeur 'x '+ 'y)
+(constructeur 'x 'z '*)
 ;(operateur '(+ 1 6))
 ;(operateur '(3 / 2))
 ;(operateur '(5 9 *))
