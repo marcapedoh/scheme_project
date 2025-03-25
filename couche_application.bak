@@ -1,0 +1,11 @@
+#lang scheme
+(require "couche_metier.rkt")
+
+
+(define simplif* (lambda (exp)
+                   (cond
+                     ((eq? (simplification (operande1 exp)) 1) (simplification (operande2 exp)))
+                     ((eq? (simplification (operande2 exp)) 1) (simplification (operande1 exp)))
+                    )
+                  )
+)

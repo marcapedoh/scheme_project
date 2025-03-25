@@ -1,0 +1,6 @@
+#lang scheme
+
+(require "couche_application.rkt")
+(require racket/gui)
+(require racket/draw)
+(require mzlib/string)

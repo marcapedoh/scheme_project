@@ -1,0 +1,23 @@
+#lang scheme
+
+(require racket/port)
+(require mzlib/string)
+
+(provide convert_string_into_listconvert_list_into_string )
+
+
+(define convert_list_into_string(lambda (liste)
+                                  with-output-to-string (lambda () (write liste))
+                                 )
+)
+
+(define convert_string_into_list (lambda (chaine)
+                                   (read-from-string-all
+                                   (string-replace
+                                   (string-replace
+                                   (string-replace
+                                   (string-replace
+                                   (string-replace chaine "+)" "+0)") "*)" "*1)") "*" " * ") "+" " + "
+                                   (lambda (event) '(veuillez vérifier vos parenthèses SVP !!!)))))                                                       
+                                  )
+)
